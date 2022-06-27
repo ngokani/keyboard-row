@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -5,50 +6,50 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        main.findWords(new String[]{"qwety", "qwety", "Dad", "Peace"});
+        main.findWords(new String[]{"qwety", "qwety", "qad", "qwety"});
     }
 
-    public String[] cry(String[] words) {
-        char[] rowOne = {'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'};
-        char[] rowTwo = {'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'};
-        char[] rowThree = {'z', 'x', 'c', 'v', 'b', 'n', 'm'};
-
-        StringBuilder resultWord = new StringBuilder();
-        String[] resultArray = new String[0];
-        int i;
-        int j;
-        int k;
-        for (k = 0; k < words.length; k++) {
-            String word = words[k].toLowerCase(Locale.ROOT);
-            char[] wordArray = word.toCharArray();
-            for (i = 0; i < rowTwo.length; i++) {
-                for (j = 0; j < word.length(); j++) {
-                    if (wordArray[i] == rowTwo[j]) {
-                        resultWord.append(wordArray[i]);
-                        System.out.println(resultWord);
-                    }
-                    break;
-                }
-            }
-            if (!word.equals(words[k])) {
-                break;
-            }
-            resultArray[k] = Arrays.toString(new String[]{String.valueOf(resultWord)});
-        }
-        return resultArray;
-    }
+//    public String[] cry(String[] words) {
+//        char[] rowOne = {'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'};
+//        char[] rowTwo = {'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'};
+//        char[] rowThree = {'z', 'x', 'c', 'v', 'b', 'n', 'm'};
+//
+//        StringBuilder resultWord = new StringBuilder();
+//        String[] resultArray = new String[0];
+//        int i;
+//        int j;
+//        int k;
+//        for (k = 0; k < words.length; k++) {
+//            String word = words[k].toLowerCase(Locale.ROOT);
+//            char[] wordArray = word.toCharArray();
+//            for (i = 0; i < rowTwo.length; i++) {
+//                for (j = 0; j < word.length(); j++) {
+//                    if (wordArray[i] == rowTwo[j]) {
+//                        resultWord.append(wordArray[i]);
+//                        System.out.println(resultWord);
+//                    }
+//                    break;
+//                }
+//            }
+//            if (!word.equals(words[k])) {
+//                break;
+//            }
+//            resultArray[k] = Arrays.toString(new String[]{String.valueOf(resultWord)});
+//        }
+//        return resultArray;
+//    }
 
     public String[] findWords(String[] words) {
-        char[] rowOne = {'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'};
-        char[] rowTwo = {'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'};
-        char[] rowThree = {'z', 'x', 'c', 'v', 'b', 'n', 'm'};
 
         String rowStringOne = "qwertyuiop";
+        String rowStringTwo = "asdfghjkl";
+        String rowStringThree = "zxcvbnm";
 
         int i;
         int j = 0;
         int k;
-        String[] resultArray = new String[words.length];
+
+        ArrayList<String> resultArray = new ArrayList<>();
 
         for (k = 0; k < words.length; k++) {
             StringBuilder result = new StringBuilder();
@@ -62,13 +63,13 @@ public class Main {
                 }   result.append(myChar);
             }
             if (result.toString().equals(words[k])) {
-                resultArray[j] = Arrays.toString(new String[]{String.valueOf(result)});
-                System.out.println(Arrays.toString(resultArray));
+                resultArray.add(j, result.toString());
                 result.delete(1,result.length());
                 j++;
             }
         }
-        return resultArray;
+        System.out.println(Arrays.toString(resultArray.toArray(new String[0])));
+        return resultArray.toArray(new String[0]);
     }
 }
 
