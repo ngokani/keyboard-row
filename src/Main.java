@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
@@ -45,28 +46,35 @@ public class Main {
         String rowStringTwo = "asdfghjkl";
         String rowStringThree = "zxcvbnm";
 
+        String[] keyboard = {rowStringOne, rowStringTwo, rowStringThree};
         int i;
         int j = 0;
         int k;
+        int p;
 
         ArrayList<String> resultArray = new ArrayList<>();
 
-        for (k = 0; k < words.length; k++) {
-            StringBuilder result = new StringBuilder();
-            String word = words[k].toLowerCase(Locale.ROOT);
-            char[] wordArray = word.toCharArray();
-            for (i = 0; i < wordArray.length; i++) {
-                char myChar = wordArray[i];
-                if (rowStringOne.indexOf(myChar) == -1) {
-                    result.delete(0,result.length());
-                    break;
-                }   result.append(myChar);
+        for (p = 0; p < keyboard.length; p++) {
+            String row = keyboard[p];
+            for (k = 0; k < words.length; k++) {
+                StringBuilder result = new StringBuilder();
+                String word = words[k].toLowerCase(Locale.ROOT);
+                char[] wordArray = word.toCharArray();
+                for (i = 0; i < wordArray.length; i++) {
+                    char myChar = wordArray[i];
+                    if (row.indexOf(myChar) == -1) {
+                        result.delete(0, result.length());
+                        break;
+                    }
+                    result.append(myChar);
+                }
+                if (result.toString().equals(words[k])) {
+                    resultArray.add(j, result.toString());
+                    result.delete(1, result.length());
+                    j++;
+                }
             }
-            if (result.toString().equals(words[k])) {
-                resultArray.add(j, result.toString());
-                result.delete(1,result.length());
-                j++;
-            }
+
         }
         System.out.println(Arrays.toString(resultArray.toArray(new String[0])));
         return resultArray.toArray(new String[0]);
