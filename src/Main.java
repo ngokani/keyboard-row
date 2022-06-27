@@ -57,7 +57,7 @@ public class Main {
             for (i = 0; i < wordArray.length; i++) {
                 char myChar = wordArray[i];
                 if (rowStringOne.indexOf(myChar) == -1) {
-                    result.delete(1,result.length());
+                    result.delete(0,result.length());
                     break;
                 }   result.append(myChar);
             }
